@@ -29,3 +29,7 @@
 
 # Tabs Screen
 <img src="assets/images/screenshot/tabs.png">  
+
+screen record of my app 
+
+https://youtu.be/cl4DzwwdqyM?feature=shared
