@@ -1,53 +1,55 @@
-// SignIn.js
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, Button, TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router'; // Import useRouter
-import Icon from 'react-native-vector-icons/MaterialIcons'; // Import the icon library
+import Icon from 'react-native-vector-icons/MaterialIcons'; // Import Icon for eye
 
-const SignIn = () => {
-  const [passwordVisible, setPasswordVisible] = useState(false); // State for password visibility
+const LogIn = () => {
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false); // State for password visibility
   const router = useRouter(); // Initialize router
 
-  const handleSignIn = () => {
-    // Perform sign-in logic here
-
-    // Navigate to the "Home" screen after successful sign-in
-    router.push('/home');
+  const handleLogIn = () => {
+    // Perform login logic here
+    router.push('/home'); // Navigate to home screen
   };
 
   const togglePasswordVisibility = () => {
-    setPasswordVisible(!passwordVisible);
+    setIsPasswordVisible(!isPasswordVisible); // Toggle the password visibility
   };
 
   return (
     <View style={styles.container}>
       <View style={styles.formBox}>
-        <Text style={styles.title}>Sign In</Text> {/* Updated the title to "Sign In" */}
+        <Text style={styles.title}>Log In</Text>
 
         <View style={styles.inputGroup}>
           <Text style={styles.label}>Email</Text>
           <TextInput
             style={styles.input}
-            placeholder="Enter your email"
-            keyboardType="email-address"
+            
           />
         </View>
 
         <View style={styles.inputGroup}>
           <Text style={styles.label}>Password</Text>
-          <View style={styles.passwordContainer}>
-            <TextInput
-              style={styles.input}
-              placeholder="Enter your password"
-              secureTextEntry={!passwordVisible} // Show/hide password based on state
+          <TextInput
+            style={styles.input}
+         
+            secureTextEntry={!isPasswordVisible} // Toggle password visibility
+          />
+          {/* Show/Hide eye icon */}
+          <TouchableOpacity
+            style={styles.eyeIcon}
+            onPress={togglePasswordVisibility}
+          >
+            <Icon
+              name={isPasswordVisible ? 'visibility-off' : 'visibility'}
+              size={24}
+              color="white"
             />
-            <TouchableOpacity onPress={togglePasswordVisibility} style={styles.eyeIcon}>
-              <Icon name={passwordVisible ? 'visibility' : 'visibility-off'} size={24} color="white" /> {/* Icon color set to white */}
-            </TouchableOpacity>
-          </View>
+          </TouchableOpacity>
         </View>
 
-        <Button title="Sign In" onPress={handleSignIn} /> {/* Updated button text to "Sign In" */}
+        <Button title="Log In" onPress={handleLogIn} />
       </View>
     </View>
   );
@@ -69,7 +71,7 @@ const styles = StyleSheet.create({
     borderColor: '#ddd',
     borderRadius: 10,
     backgroundColor: '#00FFFF',
-    shadowColor: '#000',
+    shadowColor: 'black',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 4,
@@ -83,6 +85,8 @@ const styles = StyleSheet.create({
   },
   inputGroup: {
     marginBottom: 15,
+    color: 'black',
+    position: 'relative', // To position the eye icon inside the input field
   },
   label: {
     fontSize: 16,
@@ -92,24 +96,19 @@ const styles = StyleSheet.create({
   input: {
     width: '100%',
     padding: 10,
-    paddingRight: 40, // Space for the icon
+    paddingRight: 40, // Make room for the eye icon inside the input
     borderWidth: 1,
     borderColor: '#ccc',
     borderRadius: 5,
     backgroundColor: 'black',
     color: 'white',
   },
-  passwordContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    position: 'relative', // Allow absolute positioning of the icon
-  },
   eyeIcon: {
-    position: 'absolute', // Position icon absolutely within the input field
-    right: 10, // Position it 10 units from the right
-    top: '50%', // Center it vertically
-    transform: [{ translateY: -12 }], // Adjust for vertical alignment
+    position: 'absolute',
+    right: 10,
+    top: 25,
+    padding: 10,
   },
 });
 
-export default SignIn;
+export default LogIn;

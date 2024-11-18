@@ -1,60 +1,61 @@
-// SignIn.js
-import { StyleSheet, Text, View, TextInput, Switch, Button } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Button, TouchableOpacity } from 'react-native';
 import React, { useState } from 'react';
 import { useRouter } from 'expo-router'; // Ensure correct import
+import Icon from 'react-native-vector-icons/MaterialIcons'; // Import eye icon
 
-const SignIn = () => {
-  const [isSavePassword, setIsSavePassword] = useState(false); // State for saving password preference
+const SignUp = () => {
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const router = useRouter(); // Initialize router
 
-  const handleSavePasswordToggle = () => {
-    setIsSavePassword(!isSavePassword); // Toggle save password preference
+  const handlePasswordVisibilityToggle = () => {
+    setIsPasswordVisible(!isPasswordVisible);
   };
 
-  const handleSignIn = () => {
-    // Perform your sign-in logic here (e.g., form validation, API call)
-    router.push('/home'); // Navigate to home after successful sign-in
+  const handleSignUp = () => {
+    // Perform your sign-up logic here (e.g., form validation, API call)
+    router.push('/sign-in'); // Ensure this route is correctly configured
   };
 
   return (
     <View style={styles.container}>
       <View style={styles.formBox}>
-        <Text style={styles.title}>Sign In</Text> {/* Updated to "Sign In" */}
+        <Text style={styles.title}>Sign Up</Text>
 
         <View style={styles.inputGroup}>
-          <Text style={styles.label}>Email</Text> {/* Updated label */}
+          <Text style={styles.label}>Name</Text>
           <TextInput
             style={styles.input}
-            placeholder="Enter your email"
-            keyboardType="email-address"
+           
           />
         </View>
 
         <View style={styles.inputGroup}>
-          <Text style={styles.label}>Password</Text> {/* Updated label */}
+          <Text style={styles.label}>Email</Text>
           <TextInput
             style={styles.input}
-            placeholder="Enter your password"
-            secureTextEntry
-          />
-        </View>
-
-        <View style={styles.savePasswordContainer}>
-          <Switch
-            value={isSavePassword}
-            onValueChange={handleSavePasswordToggle}
-          />
-          <Text style={styles.savePasswordText}>Save password</Text> {/* Retained save password toggle */}
-        </View>
-
-        <Button title="Sign In" onPress={handleSignIn} /> {/* Updated to "Sign In" */}
+            
         
+          />
+        </View>
+
+        <View style={styles.inputGroup}>
+          <Text style={styles.label}>Password</Text>
+          <View style={styles.passwordContainer}>
+            <TextInput
+              style={styles.input}
+          
+              secureTextEntry={!isPasswordVisible} // Toggle password visibility
+            />
+            <TouchableOpacity onPress={handlePasswordVisibilityToggle} style={styles.eyeIcon}>
+              <Icon name={isPasswordVisible ? 'visibility-off' : 'visibility'} size={24} color="white" />
+            </TouchableOpacity>
+          </View>
+        </View>
+
+        <Button title="Sign Up" onPress={handleSignUp} />
         <Text style={styles.link}>
-          Don't have an account?{' '}
-          <Text style={styles.linkText} onPress={() => router.push('/signup')}>
-            Sign up
-          </Text>
-        </Text> {/* Link to Sign Up page */}
+          <Text style={styles.linkText} onPress={() => router.push('/sign-in')}>Go to Login</Text>
+        </Text>
       </View>
     </View>
   );
@@ -105,22 +106,25 @@ const styles = StyleSheet.create({
     backgroundColor: 'black',
     color: 'white',
   },
-  savePasswordContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginVertical: 10,
+  passwordContainer: {
+    position: 'relative', // Make the container of the password field relative
+    width: '100%',
   },
-  savePasswordText: {
-    marginLeft: 8,
-    fontSize: 16,
+  eyeIcon: {
+    position: 'absolute',
+    right: 10, // Position the icon on the right side of the input field
+    top: '30%',
+    transform: [{ translateY: -12 }], // Center the icon vertically
+    padding: 10,
   },
   link: {
     marginTop: 20,
     fontSize: 16,
+    marginLeft:140,
   },
   linkText: {
     color: 'blue',
   },
 });
 
-export default SignIn;
+export default SignUp;

@@ -1,100 +1,127 @@
+import React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image } from 'react-native';
-import { Link } from 'expo-router';
+import { Text, View, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import { router } from 'expo-router';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { images, logo } from '../constants';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      
-      <View style={styles.header}>
-        <Text style={styles.headerText}>HDM App</Text>
+    <SafeAreaView style={styles.safeArea}>
+      <View style={styles.mainContainer}>
         
+        {/* Title Text */}
+        <Text style={styles.titleText}>HDM App</Text>
+
+        {/* Logo Image */}
+        {logo && logo.hdm ? (
+          <Image source={logo.hdm} style={styles.logo} />
+        ) : (
+          <Image 
+            source={{ uri: 'https://c8.alamy.com/comp/2RCKNFT/hdm-logo-hdm-letter-hdm-letter-logo-design-initials-hdm-logo-linked-with-circle-and-uppercase-monogram-logo-hdm-typography-for-technology-busines-2RCKNFT.jpg' }}
+            style={styles.logo} 
+          />
+        )}
+
+        {/* Description and Slogan */}
+        <Text style={styles.appDescription}>
+          Discover the best travel experiences with HDM, your ultimate guide to exploring the world!
+        </Text>
+        
+        <Text style={styles.sloganText}>
+          "Explore, Dream, Discover!"
+        </Text>
+
+        {/* Let's Get Started Button */}
+        <TouchableOpacity
+          onPress={() => router.push('/sign-up')}
+          style={styles.emailButton}
+        >
+          <Text style={styles.emailButtonText}>Let's Get Started</Text>
+        </TouchableOpacity>
+
+        {/* Portfolio Images */}
+        <Image
+          source={images.logo}
+          style={styles.largeImage}
+          resizeMode="contain"
+        />
+
+        <Image
+          source={images.portfolio}
+          style={styles.smallImage}
+          resizeMode="contain"
+        />
+
       </View>
-      <Image
-        source={{ uri: 'https://c8.alamy.com/comp/2RCKNFT/hdm-logo-hdm-letter-hdm-letter-logo-design-initials-hdm-logo-linked-with-circle-and-uppercase-monogram-logo-hdm-typography-for-technology-busines-2RCKNFT.jpg' }} // Replace with your image URL
-        style={styles.image}
-      />
-      <Text style={styles.appDescription}>
-        An app designed for movie buffs that provides a carefully chosen collection of HD or higher quality movies {/* App Description */}
-      </Text>
-      <Text style={styles.appSlogan}>
-        "Your journey begins here!" {/* App Slogan */}
-      </Text>
-      <View style={styles.buttonContainer}>
-        <Link href="/sign-up" style={styles.button}>Let's Get Started</Link>
-      </View>
-      <StatusBar style="auto" />
-    </View>
+
+      <StatusBar backgroundColor="#161622" style="light" />
+    </SafeAreaView>
   );
 }
 
+// Styles for the component
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+  safeArea: {
     backgroundColor: '#00FFFF',
     alignItems: 'center',
     justifyContent: 'center',
-    padding: 20, // Added padding for better layout
-    position: 'relative', // Necessary for absolute positioning of icons
+    flex: 1,
+    padding: 20,
   },
-  header: {
-    marginBottom: 20, // Space between header and image
-    alignItems: 'center', // Center text horizontally
+  mainContainer: {
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flex: 1,
+    paddingHorizontal: 20,
   },
-  headerText: {
+  titleText: {
+    fontSize: 26,
+    fontWeight: 'bold',
+    marginBottom: 5,
+    textAlign: 'center',
     color: 'black',
-    fontSize: 24,
   },
-  appName: {
-    color: 'black',
-    fontSize: 28, // Font size for app name
-    fontWeight: 'bold', // Bold font for emphasis
-  },
-  image: {
-    width: 100, // Adjust width as needed
-    height: 100, // Adjust height as needed
-    marginBottom: 20, // Space between image and buttons
-    padding: 50,
+  logo: {
+    width: 100,
+    height: 100,
+    marginBottom: 10,
     borderRadius: 20,
-    borderLeftWidth: 40,
-    borderRightWidth: 40,
   },
   appDescription: {
+    fontSize: 16,
+    textAlign: 'center',
+    marginBottom: 5,
     color: 'black',
-    fontSize: 16, // Font size for description
-    textAlign: 'center', // Centered text
-    marginBottom: 10, // Space below description
-    paddingHorizontal: 10, // Padding for better readability
+    paddingHorizontal: 10,
   },
-  appSlogan: {
+  sloganText: {
+    fontSize: 18,
+    fontStyle: 'italic',
     color: 'black',
-    fontSize: 16, // Font size for slogan
-    fontStyle: 'italic', // Italic style for slogan
-    marginBottom: 20, // Space below slogan
+    marginBottom: 10,
+    textAlign: 'center',
   },
-  buttonContainer: {
-    width: '50%', // Adjust button container width as needed
-    textAlign: 'center', 
+  emailButton: {
+    backgroundColor: 'black',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 5,
   },
-  button: {
-    backgroundColor: 'black', 
-    color: 'white', 
-    paddingVertical: 8, 
-    paddingHorizontal: 16, 
-    fontSize: 14, 
-    textAlign: 'center', 
-    marginBottom: 10, 
-    borderRadius: 5, 
-    display: 'inline-block', 
+  emailButtonText: {
+    color: 'white',
+    fontSize: 16,
+    textAlign: 'center',
+    fontWeight: 'bold',
   },
-  topLeftIcon: {
-    position: 'absolute',
-    top: 10,
-    left: 10,
+  largeImage: {
+    width: 300,
+    height: 84,
   },
-  bottomRightIcon: {
-    position: 'absolute',
-    bottom: 10,
-    right: 10,
+  smallImage: {
+    width: 200,
+    height: 200,
   },
 });
+
