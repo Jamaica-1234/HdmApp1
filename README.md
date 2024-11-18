@@ -1,11 +1,11 @@
-# TechFolio Hub
-TechFolio Mobile App.
+# Hdm App
+
 
 # Features
-* Share Projects
-* Message other developers
-* Rate others work
-* Search other developers
+* watch movies
+* create group
+* search movies
+
 
 # Course Overview
 * Basic React Native Components
