@@ -22,7 +22,7 @@ TechFolio Mobile App.
 <img src="assets/images/onboarding.jpg">  
 
 # Sign Up Screen
-<img src="assets/images/signup.jpg">  
+<img src="assets/images/sign up.jpg">  
 
 # Sign In Screen
 <img src="assets/images/login.jpg">  
