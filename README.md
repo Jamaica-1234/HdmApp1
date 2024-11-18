@@ -9,8 +9,7 @@
 
 # Course Overview
 * Basic React Native Components
-* Database Design using Appwrite
-* User Registration & Authenticaiton
+* User Sign Up and Log In
 * Deployment
 
 # Tech Stack
